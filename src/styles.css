@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+}
+
+::-webkit-scrollbar {
+
+}
+.drag-bar {
+  background-color: #8cc6ff;
+  height: 2px;
+  width: 100%;
+  -webkit-app-region: drag;
+  /* sürüklenebilir */
+  background: transparent;
+  /* görünmez */
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 99;
+}
+

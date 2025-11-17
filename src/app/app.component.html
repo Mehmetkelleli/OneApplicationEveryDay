@@ -1,0 +1,64 @@
+<body>
+  <div class="app-1" *ngIf="this.page_active">
+<div class="drag-bar"></div>
+    <div class="manager">
+      <div class="schedule">
+      <div *ngFor="let item of task_list" (click)="this.selected_task = item;this.page_active=!page_active" class="task task-1">
+        <div class="icon" [ngStyle]="{'background-color': getColor(item.id!)}" style="display: flex;align-items: center;color:white"><i class="{{item.icon}}"></i></div>
+        <div class="details">
+          <h2 class="a2">{{item.title}}</h2><span class="span">{{item.startdate}} - {{item.finishdate}}</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <button class="add" *ngIf="this.page_active"  [ngStyle]="{'background-color': buttonColor}"
+  (click)="this.page_active=!page_active;changeButtonColor()"><i class="fal fa-plus"></i></button>
+  <button class="add" *ngIf="!this.page_active"  [ngStyle]="{'background-color': buttonColor}"
+ (click)="this.page_active=!page_active ; changeButtonColor()"><i class="fal fa-arrow-left"></i></button>
+  <div class="app-2" *ngIf="!this.page_active">
+    <div class="new-task">
+      <h1>Create New Task</h1>
+      <div class="tags">
+        <ul style="margin-left: 0;padding-left: 0;">
+          <ul style="margin-left: 0;padding-left: 0;" class="icon-list">
+            <li (click)="selected_task.icon = 'far fa-comment-dots'"
+              [class.active]="selected_task.icon === 'far fa-comment-dots'">
+              Meeting
+            </li>
+
+            <li (click)="selected_task.icon = 'fas fa-balance-scale'"
+              [class.active]="selected_task.icon === 'fas fa-balance-scale'">
+              Design
+            </li>
+
+            <li (click)="selected_task.icon = 'fas fa-mug-hot'" [class.active]="selected_task.icon === 'fas fa-mug-hot'">
+              Free time
+            </li>
+
+            <li (click)="selected_task.icon = 'far fa-comment'" [class.active]="selected_task.icon === 'far fa-comment'">
+              Travel
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <form class="task-create">
+      <div class="hi">
+          <label class="time" for="starttime">Title</label>
+          <input [(ngModel)]="this.selected_task.title" name="title" class="task-title" type="text" placeholder="Task Title" />
+          <label class="time" for="starttime">Description</label>
+          <input class="task-title" style="margin-top: 3px;" [(ngModel)]="this.selected_task.description"  name="desc" type="text" placeholder="Add a description..." />
+          <label class="time" for="starttime">Start Time</label>
+          <input [(ngModel)]="this.selected_task.startdate" name="startdate" class="task-title" type="text"
+            placeholder="Task Title" />
+          <label class="time" for="endtime">End Time</label>
+          <input class="task-title" style="margin-top: 3px;" [(ngModel)]="this.selected_task.finishdate" name="finishdate"
+            type="text" placeholder="Add a description..." />
+        </div>
+      <button [ngStyle]="{'background-color': createColor }" type="button" class="create" *ngIf="this.selected_task.id==null" (click)="create()">Create</button>
+      <button [ngStyle]="{'background-color': updateColor}" type="button" class="create" *ngIf="this.selected_task.id!=null" (click)="update()">Update</button>
+      <button [ngStyle]="{'background-color': deleteColor}" type="button" class="create" *ngIf="this.selected_task.id!=null" (click)="deletee()">Sil</button>
+      </form>
+    </div>
+  </div>
+</body>
