@@ -1,59 +1,95 @@
-# Days1
+Daily To-Do App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+A modern cross-platform desktop To-Do List application built with ElectronJS and Angular.
+This project is part of a personal challenge: building one application every day to improve full-stack development skills.
 
-## Development server
+🚀 Features
 
-To start a local development server, run:
+Clean and responsive UI built with Angular
 
-```bash
-ng serve
-```
+Desktop application powered by ElectronJS
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Create, update, and delete tasks
 
-## Code scaffolding
+Select icons for each task
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Color-animated action buttons
 
-```bash
-ng generate component component-name
-```
+Local data storage using electron-store
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Always-on-top widget-style window
 
-```bash
-ng generate --help
-```
+Runs without Node.js on end-user machines
 
-## Building
+Auto-launch on system startup (optional)
 
-To build the project run:
+📦 Technologies Used
 
-```bash
-ng build
-```
+Angular 17
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+ElectronJS
 
-## Running unit tests
+Electron Store (JSON-based local DB)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+IPC Communication (secure message passing)
 
-```bash
-ng test
-```
+Font Awesome for icons
 
-## Running end-to-end tests
+HTML / CSS / TypeScript
 
-For end-to-end (e2e) testing, run:
+🛠 How to Run the Project (Development Mode)
+1️⃣ Install dependencies
+npm install
 
-```bash
-ng e2e
-```
+2️⃣ Start Angular + Electron together
+npm run electron:dev
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+This command launches:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Angular dev server
+
+Electron window loading http://localhost:4200
+
+🏗 Building the Desktop Application
+
+You can generate a standalone .exe installer (no Node.js required):
+
+npx electron-builder
+
+
+The packaged app will be created inside:
+
+/dist-electron
+
+
+You can ship this folder or installer directly to users.
+
+📁 Project Structure
+/src               -> Angular frontend
+/electron          -> Electron main + preload + db
+/electron/main.js  -> Desktop app window logic
+/electron/preload.js -> Secure IPC bridge
+/electron/db.js    -> Local storage
+
+🔧 Database (Local Storage)
+
+The app uses electron-store, saving all tasks in:
+
+%APPDATA%/YourAppName/config.json
+
+
+This ensures tasks persist between launches.
+
+🧪 Scripts
+"electron:dev": "concurrently \"ng serve\" \"wait-on http://localhost:4200 && electron ./electron/main.js\"",
+"electron": "ng build --base-href ./ && electron ./electron/main.js"
+
+🤝 Contributing
+
+Feel free to submit improvements, issues, or new feature ideas.
+This project evolves daily as part of the “One App per Day” challenge.
+
+📜 License
+
+MIT License
